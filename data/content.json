@@ -155,7 +155,7 @@
         "Tailwind"
       ],
       "github": "https://github.com/misbah-aiman/AI-Timetable.git",
-      "demo": "",
+      "demo": "https://ai-timetable-nine.vercel.app/",
       "featured": true
     },
     {
@@ -169,7 +169,8 @@
         "Tailwind"
       ],
       "github": "https://github.com/misbah-aiman/Notes-App.git",
-      "featured": true
+      "featured": true,
+      "demo": "https://notes-app-gamma-three-63.vercel.app/"
     }
   ]
 }
