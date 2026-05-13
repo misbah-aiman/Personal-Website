@@ -147,7 +147,7 @@
       "id": "quill",
       "title": "Ai Timetable",
       "description": "AI-Timetable is a React + TypeScript web app (with an Express/MongoDB backend and OpenAI integration) for generating and managing timetables/schedules using AI.",
-      "image": "",
+      "image": "/images/projects/ai-timetable.jpeg",
       "tags": [
         "Next.js",
         "TypeScript",
@@ -162,7 +162,7 @@
       "id": "sift",
       "title": "Notes App",
       "description": "A simple and interactive notes application built with React + TypeScript where users can easily manage and store their notes.",
-      "image": "",
+      "image": "/images/projects/notes-app.jpeg",
       "tags": [
         "Next.js",
         "TypeScript",
