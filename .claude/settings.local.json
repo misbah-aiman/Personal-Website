@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl *)",
+      "Bash(node -e 'let s=\"\"; process.stdin.on\\(\"data\",d=>s+=d\\); process.stdin.on\\(\"end\",\\(\\)=>{const c=JSON.parse\\(s\\); console.log\\(\"After reset: site.name =\", c.site.name, \"| projects =\", c.projects.length\\);}\\)')",
+      "Bash(node *)",
+      "Bash(npx tsc *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "site": {
+    "name": "Misbah",
+    "role": "Computer Science Student",
+    "email": "misbahaiman65@gmail.com",
+    "github": "https://github.com/misbah-aiman",
+    "linkedin": "www.linkedin.com/in/misbah-aiman",
+    "twitter": "https://x.com/Misbah_Aiman_",
+    "instagram": "",
+    "location": "Lahore, Pakistan"
+  },
+  "typingPhrases": [
+    "Computer Science Student",
+    "Full-Stack Developer",
+    "Digital Artist & Sketcher",
+    "Lifelong Learner"
+  ],
+  "about": {
+    "intro": "Hi, I’m Misbah — a Computer Science student who loves crafting things at the intersection of code and creativity.",
+    "body": [
+      "I’m currently studying CS with a focus on systems, web engineering, and applied machine learning. When I’m not chasing bugs, I’m usually sketching, writing, or chasing a new side project that probably doesn’t need to exist.",
+      "I care a lot about clean interfaces, thoughtful typography, and code that reads like prose. I believe the best engineers are also curious humans — so I balance late-night coding sessions with charcoal pencils, books, and long walks."
+    ],
+    "stats": [
+      {
+        "value": "few",
+        "label": "Projects Built"
+      },
+      {
+        "value": "4",
+        "label": "Languages"
+      }
+    ]
+  },
+  "skillGroups": [
+    {
+      "id": "languages",
+      "title": "Languages",
+      "skills": [
+        {
+          "name": "TypeScript",
+          "iconName": "SiTypescript"
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "SiJavascript"
+        },
+        {
+          "name": "Java",
+          "iconName": "FaJava"
+        },
+        {
+          "name": "C++",
+          "iconName": "SiCplusplus"
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "title": "Frontend",
+      "skills": [
+        {
+          "name": "React",
+          "iconName": "SiReact"
+        },
+        {
+          "name": "Next.js",
+          "iconName": "SiNextdotjs"
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "SiTailwindcss"
+        },
+        {
+          "name": "HTML5",
+          "iconName": "SiHtml5"
+        },
+        {
+          "name": "CSS3",
+          "iconName": "SiCss3"
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "title": "Backend & Data",
+      "skills": [
+        {
+          "name": "Node.js",
+          "iconName": "SiNodedotjs"
+        },
+        {
+          "name": "PostgreSQL",
+          "iconName": "SiPostgresql"
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "SiMongodb"
+        },
+        {
+          "name": "Supabase",
+          "iconName": "SiSupabase"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools & ML",
+      "skills": [
+        {
+          "name": "Git",
+          "iconName": "SiGit"
+        },
+        {
+          "name": "Linux",
+          "iconName": "SiLinux"
+        },
+        {
+          "name": "Vercel",
+          "iconName": "SiVercel"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "uet",
+      "school": "University of Management & Technology",
+      "degree": "B.S. Computer Science",
+      "period": "2023 — 2027",
+      "location": "Lahore, Pakistan",
+      "description": "Coursework in algorithms, distributed systems, coding, and HCI. Active member of the ACM student chapter.",
+      "grade": "GPA: 3.0 / 4.0"
+    },
+    {
+      "id": "beaconhouse",
+      "school": "Aspire College",
+      "degree": "Computer Science",
+      "period": "2021 — 2023",
+      "location": "Depalpur, Pakistan",
+      "description": "Specialized in Mathematics, Physics, and Computer Science. Led the school’s coding club and tutored juniors in algorithms.",
+      "grade": "85%"
+    }
+  ],
+  "projects": [
+    {
+      "id": "quill",
+      "title": "Ai Timetable",
+      "description": "AI-Timetable is a React + TypeScript web app (with an Express/MongoDB backend and OpenAI integration) for generating and managing timetables/schedules using AI.",
+      "image": "",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "OpenAI",
+        "Tailwind"
+      ],
+      "github": "https://github.com/misbah-aiman/AI-Timetable.git",
+      "demo": "",
+      "featured": true
+    },
+    {
+      "id": "sift",
+      "title": "Notes App",
+      "description": "A simple and interactive notes application built with React + TypeScript where users can easily manage and store their notes.",
+      "image": "",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind"
+      ],
+      "github": "https://github.com/misbah-aiman/Notes-App.git",
+      "featured": true
+    }
+  ]
+}
