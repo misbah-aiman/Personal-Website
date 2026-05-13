@@ -1,35 +1,72 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { head, put } from "@vercel/blob";
 import type { Content } from "./types";
 import { DEFAULT_CONTENT } from "./defaults";
 
+const BLOB_PATH = "content.json";
 const DATA_DIR = path.join(process.cwd(), "data");
 const CONTENT_FILE = path.join(DATA_DIR, "content.json");
 
+const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
+
 let memoryCache: Content | null = null;
 
-async function ensureDir() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-}
-
-export async function getContent(): Promise<Content> {
-  if (memoryCache) return memoryCache;
+async function readFromBlob(): Promise<string | null> {
   try {
-    const raw = await fs.readFile(CONTENT_FILE, "utf8");
-    const parsed = JSON.parse(raw) as Content;
-    memoryCache = mergeWithDefaults(parsed);
-    return memoryCache;
+    const meta = await head(BLOB_PATH);
+    const res = await fetch(meta.url, { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.text();
   } catch {
-    memoryCache = structuredClone(DEFAULT_CONTENT);
-    return memoryCache;
+    return null;
   }
 }
 
+async function readFromFile(): Promise<string | null> {
+  try {
+    return await fs.readFile(CONTENT_FILE, "utf8");
+  } catch {
+    return null;
+  }
+}
+
+export async function getContent(): Promise<Content> {
+  if (!useBlob && memoryCache) return memoryCache;
+
+  const raw = (useBlob ? await readFromBlob() : null) ?? (await readFromFile());
+
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw) as Content;
+      const merged = mergeWithDefaults(parsed);
+      if (!useBlob) memoryCache = merged;
+      return merged;
+    } catch {
+      // fall through to defaults
+    }
+  }
+
+  const fallback = structuredClone(DEFAULT_CONTENT);
+  if (!useBlob) memoryCache = fallback;
+  return fallback;
+}
+
 export async function saveContent(content: Content): Promise<Content> {
-  await ensureDir();
   const merged = mergeWithDefaults(content);
-  await fs.writeFile(CONTENT_FILE, JSON.stringify(merged, null, 2), "utf8");
-  memoryCache = merged;
+  const serialized = JSON.stringify(merged, null, 2);
+  if (useBlob) {
+    await put(BLOB_PATH, serialized, {
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: "application/json",
+    });
+  } else {
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.writeFile(CONTENT_FILE, serialized, "utf8");
+    memoryCache = merged;
+  }
   return merged;
 }
 
