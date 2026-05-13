@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiSettings } from "react-icons/fi";
+import { FiMenu, FiX, FiSettings, FiLogOut } from "react-icons/fi";
 import { NAV_LINKS } from "@/lib/nav";
 import type { SiteInfo } from "@/lib/types";
 import ThemeToggle from "./ThemeToggle";
@@ -14,8 +15,14 @@ export default function Navbar({
   site: SiteInfo;
   isAdmin?: boolean;
 }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.refresh();
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -67,14 +74,24 @@ export default function Navbar({
             Let’s talk
           </a>
           {isAdmin && (
-            <a
-              href="/admin"
-              title="Open admin"
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-2 text-sm font-medium text-muted transition hover:border-accent hover:text-accent"
-            >
-              <FiSettings size={14} />
-              <span className="hidden sm:inline">Admin</span>
-            </a>
+            <>
+              <a
+                href="/admin"
+                title="Open admin"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-2 text-sm font-medium text-muted transition hover:border-accent hover:text-accent"
+              >
+                <FiSettings size={14} />
+                <span className="hidden sm:inline">Admin</span>
+              </a>
+              <button
+                onClick={logout}
+                title="Log out"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-2 text-sm font-medium text-muted transition hover:border-red-500 hover:text-red-500"
+              >
+                <FiLogOut size={14} />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </>
           )}
           <ThemeToggle />
           <button
