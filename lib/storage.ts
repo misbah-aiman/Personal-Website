@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { head, put } from "@vercel/blob";
+import { get, put } from "@vercel/blob";
 import type { Content } from "./types";
 import { DEFAULT_CONTENT } from "./defaults";
 
@@ -8,17 +8,24 @@ const BLOB_PATH = "content.json";
 const DATA_DIR = path.join(process.cwd(), "data");
 const CONTENT_FILE = path.join(DATA_DIR, "content.json");
 
-const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
+const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+const useBlob = !!blobToken;
 
 let memoryCache: Content | null = null;
 
-async function readFromBlob(): Promise<string | null> {
+/** Reads JSON from Blob using the SDK (auth + store routing). Avoids naked CDN fetch on meta.url, which can fail or appear stale. */
+async function readFromBlob(token: string): Promise<string | null> {
   try {
-    const meta = await head(BLOB_PATH);
-    const res = await fetch(meta.url, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.text();
-  } catch {
+    const result = await get(BLOB_PATH, {
+      access: "public",
+      token,
+      useCache: false,
+    });
+    if (result === null) return null;
+    if (result.statusCode !== 200 || !result.stream) return null;
+    return await new Response(result.stream).text();
+  } catch (e) {
+    console.error("[storage] readFromBlob failed:", e);
     return null;
   }
 }
@@ -34,7 +41,15 @@ async function readFromFile(): Promise<string | null> {
 export async function getContent(): Promise<Content> {
   if (!useBlob && memoryCache) return memoryCache;
 
-  const raw = (useBlob ? await readFromBlob() : null) ?? (await readFromFile());
+  const blobRaw =
+    useBlob && blobToken ? await readFromBlob(blobToken) : null;
+  const fileRaw = blobRaw === null ? await readFromFile() : null;
+  const raw = blobRaw ?? fileRaw;
+  if (useBlob && blobRaw === null && fileRaw !== null) {
+    console.warn(
+      "[storage] BLOB_READ_WRITE_TOKEN is set but blob read failed or empty; using data/content.json until blob is readable.",
+    );
+  }
 
   if (raw) {
     try {
@@ -55,9 +70,10 @@ export async function getContent(): Promise<Content> {
 export async function saveContent(content: Content): Promise<Content> {
   const merged = mergeWithDefaults(content);
   const serialized = JSON.stringify(merged, null, 2);
-  if (useBlob) {
+  if (useBlob && blobToken) {
     await put(BLOB_PATH, serialized, {
       access: "public",
+      token: blobToken,
       addRandomSuffix: false,
       allowOverwrite: true,
       contentType: "application/json",
