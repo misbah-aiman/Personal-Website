@@ -2,12 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiSettings } from "react-icons/fi";
 import { NAV_LINKS } from "@/lib/nav";
 import type { SiteInfo } from "@/lib/types";
 import ThemeToggle from "./ThemeToggle";
 
-export default function Navbar({ site }: { site: SiteInfo }) {
+export default function Navbar({
+  site,
+  isAdmin = false,
+}: {
+  site: SiteInfo;
+  isAdmin?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -60,6 +66,16 @@ export default function Navbar({ site }: { site: SiteInfo }) {
           >
             Let’s talk
           </a>
+          {isAdmin && (
+            <a
+              href="/admin"
+              title="Open admin"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-2 text-sm font-medium text-muted transition hover:border-accent hover:text-accent"
+            >
+              <FiSettings size={14} />
+              <span className="hidden sm:inline">Admin</span>
+            </a>
+          )}
           <ThemeToggle />
           <button
             aria-label="Toggle menu"

@@ -141,9 +141,7 @@ export default function AdminClient({ initial }: { initial: Content }) {
             )}
             <a
               href="/"
-              target="_blank"
-              rel="noopener"
-              className="hidden items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted transition hover:border-accent hover:text-accent sm:inline-flex"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted transition hover:border-accent hover:text-accent"
             >
               View site <FiExternalLink size={12} />
             </a>
