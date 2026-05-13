@@ -25,6 +25,15 @@ export async function PUT(req: NextRequest) {
   if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
-  const saved = await saveContent(body);
-  return NextResponse.json({ ok: true, content: saved });
+  try {
+    const saved = await saveContent(body);
+    return NextResponse.json({ ok: true, content: saved });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Unknown error";
+    console.error("saveContent failed:", e);
+    return NextResponse.json(
+      { error: `Save failed: ${message}` },
+      { status: 500 },
+    );
+  }
 }
