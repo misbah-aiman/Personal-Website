@@ -96,7 +96,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-3 py-1.5 text-xs font-medium text-background transition hover:bg-accent hover:text-white"
                       >
-                        <FiExternalLink size={12} /> Demo
+                        <FiExternalLink size={12} /> Site
                       </a>
                     )}
                   </div>

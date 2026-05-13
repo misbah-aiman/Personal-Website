@@ -941,7 +941,7 @@ function ProjectsEditor({
               <TextField label="Title" value={p.title} onChange={(v) => onChange(items.map((x, j) => (j === i ? { ...x, title: v } : x)))} />
               <TextField label="Image URL" value={p.image} onChange={(v) => onChange(items.map((x, j) => (j === i ? { ...x, image: v } : x)))} helper="Public image URL or /images/projects/xxx.jpg" />
               <TextField label="GitHub URL" value={p.github ?? ""} onChange={(v) => onChange(items.map((x, j) => (j === i ? { ...x, github: v } : x)))} />
-              <TextField label="Demo URL" value={p.demo ?? ""} onChange={(v) => onChange(items.map((x, j) => (j === i ? { ...x, demo: v } : x)))} />
+              <TextField label="Site URL" value={p.demo ?? ""} onChange={(v) => onChange(items.map((x, j) => (j === i ? { ...x, demo: v } : x)))} helper="Live site / deployed demo link" />
             </div>
             <div className="mt-3">
               <TextArea
