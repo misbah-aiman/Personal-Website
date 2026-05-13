@@ -14,7 +14,7 @@ export default function Education({
     <section id="education" className="section-padding relative">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="03 · Education"
+          eyebrow="Education"
           title="Where I’ve been studying"
         />
 

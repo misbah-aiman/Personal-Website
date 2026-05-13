@@ -10,7 +10,7 @@ export default function Skills({ skillGroups }: { skillGroups: SkillGroup[] }) {
     <section id="skills" className="section-padding relative bg-surface/30">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="02 · Skills"
+          eyebrow="Skills"
           title="Tools I reach for"
           description="A loose taxonomy of the languages, libraries, and tools I’ve used the most. Always learning, always swapping things out."
         />

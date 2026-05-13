@@ -8,7 +8,7 @@ export default function About({ about }: { about: AboutType }) {
   return (
     <section id="about" className="section-padding relative">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="01 · About" title="A little about me" />
+        <SectionHeading eyebrow="About" title="A little about me" />
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
           <motion.div

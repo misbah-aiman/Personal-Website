@@ -36,7 +36,7 @@ export default function Contact({ site }: { site: SiteInfo }) {
     <section id="contact" className="section-padding relative bg-surface/30">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="08 · Contact"
+          eyebrow="Contact"
           title="Let’s build something"
           description="Open to internships, collabs, freelance briefs, or just a friendly hello. I usually reply within a day or two."
           align="center"

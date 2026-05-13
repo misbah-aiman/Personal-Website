@@ -27,7 +27,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
-            eyebrow="04 · Projects"
+            eyebrow="Projects"
             title="Things I’ve built"
             description="A rotating selection of side projects and coursework — pick a tag to filter."
           />
